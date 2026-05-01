@@ -99,6 +99,11 @@
       font-weight: 500;
     }
 
+    @keyframes pulse {
+      0%   { box-shadow: 0 8px 24px rgba(77,171,226,0.35), 0 0 0 0 rgba(77,171,226,0.5); }
+      60%  { box-shadow: 0 8px 24px rgba(77,171,226,0.35), 0 0 0 14px rgba(77,171,226,0); }
+      100% { box-shadow: 0 8px 24px rgba(77,171,226,0.35), 0 0 0 0 rgba(77,171,226,0); }
+    }
     .hero-btn {
       display: inline-block;
       margin-top: 32px;
@@ -110,12 +115,14 @@
       border-radius: 50px;
       text-decoration: none;
       box-shadow: 0 8px 24px rgba(77,171,226,0.35);
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      animation: pulse 2s ease-out infinite;
+      transition: background 0.2s, transform 0.15s;
     }
     .hero-btn:hover {
       background: var(--purple);
       transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(121,101,170,0.35);
+      animation: none;
+      box-shadow: 0 12px 28px rgba(121,101,170,0.4);
     }
 
     /* ── Steps progress ── */
