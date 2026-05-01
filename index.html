@@ -239,6 +239,70 @@
       letter-spacing: 0.5px;
     }
 
+    /* ── Pain points ── */
+    .pains {
+      padding: 56px 24px 48px;
+    }
+    .pains-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .pains-lead {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .pains-list {
+      list-style: none;
+      counter-reset: pain;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .pain-item {
+      counter-increment: pain;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      font-size: clamp(17px, 2vw, 22px);
+      color: var(--black);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .pain-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pain-item::before {
+      content: counter(pain);
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gray);
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hl {
+      background: transparent;
+      background-image: linear-gradient(120deg, #C8E8F8 0%, #C8E8F8 100%);
+      background-repeat: no-repeat;
+      background-size: 0% 88%;
+      background-position: 0 55%;
+      border-radius: 3px;
+      padding: 0 3px;
+      text-decoration: none;
+      font-style: normal;
+      transition: background-size 0.6s ease 0.3s;
+    }
+    .pain-item.visible .hl {
+      background-size: 100% 88%;
+    }
+
     /* ── CTA ── */
     .cta {
       text-align: center;
@@ -347,6 +411,24 @@
     <div class="swipe-hint">← листайте →</div>
   </section>
 
+  <!-- Pain points -->
+  <section class="pains">
+    <div class="pains-inner">
+      <p class="pains-lead">Это случается почти с каждым, кто покупает мебель онлайн:</p>
+      <ol class="pains-list">
+        <li class="pain-item">
+          Брали мебель «на глаз» —&nbsp;<mark class="hl">пришлось возвращать</mark>
+        </li>
+        <li class="pain-item">
+          Записывали размеры на бумажке, но&nbsp;<mark class="hl">всё равно не уверены</mark>
+        </li>
+        <li class="pain-item">
+          Боитесь, что привезут —&nbsp;а&nbsp;<mark class="hl">диван не пройдёт в дверь</mark>
+        </li>
+      </ol>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="cta reveal">
     <a href="https://makmakarova1995.github.io/nonti-fit-check/" target="_blank" rel="noopener">
@@ -428,6 +510,20 @@
       else goTo(current);
       resetAuto();
     });
+
+    // Staggered pain points
+    const painObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const items = entry.target.querySelectorAll('.pain-item');
+        items.forEach((item, i) => {
+          setTimeout(() => item.classList.add('visible'), i * 350);
+        });
+        painObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.3 });
+    const painsList = document.querySelector('.pains-list');
+    if (painsList) painObserver.observe(painsList);
 
     // Reveal on scroll
     const io = new IntersectionObserver((entries) => {
