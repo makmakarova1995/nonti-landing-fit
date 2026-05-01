@@ -99,6 +99,25 @@
       font-weight: 500;
     }
 
+    .hero-btn {
+      display: inline-block;
+      margin-top: 32px;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'ALS Sirius', sans-serif;
+      font-size: 18px;
+      padding: 18px 48px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(77,171,226,0.35);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .hero-btn:hover {
+      background: var(--purple);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(121,101,170,0.35);
+    }
+
     /* ── Steps progress ── */
     .steps {
       background: var(--gray);
@@ -368,6 +387,7 @@
   <section class="hero reveal">
     <h1>Планировщик Нонтон расставит мебель за 5 минут</h1>
     <p class="lead">Убедитесь, что мебель встанет именно так, как вы хотите — и покупайте без сомнений.</p>
+    <a class="hero-btn" href="https://makmakarova1995.github.io/nonti-fit-check/" target="_blank" rel="noopener">Запустить планировщик →</a>
   </section>
 
   <!-- Steps with progress -->
