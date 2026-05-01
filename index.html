@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Влезет ли мебель — Nonton</title>
+  <style>
+    @font-face {
+      font-family: 'ALS Sirius';
+      src: url('fonts/ALS_Sirius_Medium_1.6.otf') format('opentype');
+      font-weight: 500;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #4DABE2;
+      --purple: #7965AA;
+      --black: #1A1A1A;
+      --gray: #F5F5F5;
+    }
+
+    body {
+      font-family: 'ALS Sirius', sans-serif;
+      color: var(--black);
+      background: #fff;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 20px 48px;
+      border-bottom: 1px solid #E8E8E8;
+    }
+    header img {
+      height: 36px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 72px 24px 56px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      color: var(--blue);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--black);
+      line-height: 1.6;
+    }
+
+    /* ── Steps ── */
+    .steps {
+      background: var(--gray);
+      padding: 56px 24px;
+    }
+    .steps-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .steps h2 {
+      text-align: center;
+      font-size: clamp(20px, 3vw, 30px);
+      color: var(--blue);
+      margin-bottom: 40px;
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+    }
+    .step {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .step-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .step h3 {
+      font-size: 16px;
+      color: var(--black);
+      line-height: 1.4;
+    }
+
+    /* ── Slider ── */
+    .slider-section {
+      padding: 64px 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .slider-section h2 {
+      text-align: center;
+      font-size: clamp(20px, 3vw, 28px);
+      color: var(--blue);
+      margin-bottom: 32px;
+    }
+    .slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background: var(--gray);
+      aspect-ratio: 16/9;
+    }
+    .slides {
+      display: flex;
+      transition: transform 0.4s ease;
+      height: 100%;
+    }
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #999;
+    }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.9);
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: background 0.2s;
+    }
+    .slider-btn:hover { background: #fff; }
+    .slider-btn.prev { left: 16px; }
+    .slider-btn.next { right: 16px; }
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D0D0D0;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .dot.active { background: var(--blue); }
+
+    /* ── CTA ── */
+    .cta {
+      text-align: center;
+      padding: 64px 24px 80px;
+    }
+    .cta a {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'ALS Sirius', sans-serif;
+      font-size: 18px;
+      padding: 18px 48px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .cta a:hover {
+      background: var(--purple);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 16px 24px; }
+      .slider-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="nonton-logo.png" alt="Nonton" />
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Проверьте, влезет ли мебель — до покупки</h1>
+    <p>Нарисуем комнату и расставим мебель за вас</p>
+  </section>
+
+  <!-- Steps -->
+  <section class="steps">
+    <div class="steps-inner">
+      <h2>Как это работает</h2>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Укажите размеры комнаты</h3>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Выберите мебель из каталога</h3>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Расставьте и убедитесь, что всё входит</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slider -->
+  <section class="slider-section">
+    <h2>Вот как выглядит инструмент</h2>
+    <div class="slider" id="slider">
+      <div class="slides" id="slides">
+        <!-- Скриншоты добавятся сюда -->
+        <div class="slide">Скриншот 1</div>
+        <div class="slide">Скриншот 2</div>
+        <div class="slide">Скриншот 3</div>
+      </div>
+      <button class="slider-btn prev" onclick="move(-1)">&#8592;</button>
+      <button class="slider-btn next" onclick="move(1)">&#8594;</button>
+    </div>
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <a href="https://makmakarova1995.github.io/nonti-fit-check/" target="_blank">
+      Попробовать бесплатно →
+    </a>
+  </section>
+
+  <script>
+    const slides = document.getElementById('slides');
+    const dotsEl = document.getElementById('dots');
+    let current = 0;
+    const total = slides.children.length;
+
+    // Build dots
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => goTo(i);
+      dotsEl.appendChild(d);
+    }
+
+    function goTo(n) {
+      current = (n + total) % total;
+      slides.style.transform = `translateX(-${current * 100}%)`;
+      document.querySelectorAll('.dot').forEach((d, i) =>
+        d.classList.toggle('active', i === current)
+      );
+    }
+
+    function move(dir) { goTo(current + dir); }
+
+    // Auto-advance
+    setInterval(() => move(1), 4000);
+  </script>
+
+</body>
+</html>
