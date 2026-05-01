@@ -382,6 +382,18 @@
     .replaces-list li {
       font-size: clamp(16px, 2vw, 19px);
       line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .replaces-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--blue) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center/16px no-repeat;
+      margin-top: 2px;
     }
     .replaces-what {
       font-weight: 500;
