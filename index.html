@@ -9,9 +9,15 @@
       font-family: 'ALS Sirius';
       src: url('fonts/ALS_Sirius_Medium_1.6.otf') format('opentype');
       font-weight: 500;
+      font-display: swap;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
 
     :root {
       --blue: #4DABE2;
@@ -211,8 +217,21 @@
       background: var(--gray);
       aspect-ratio: 828/957;
       cursor: grab;
+      -webkit-user-select: none;
       user-select: none;
       box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+    /* Fallback for older Safari (<15.4) without aspect-ratio */
+    @supports not (aspect-ratio: 1) {
+      .slider {
+        height: 0;
+        padding-bottom: 115.6%; /* 957/828 */
+      }
+      .slides {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+      }
     }
     .slider:active { cursor: grabbing; }
     .slides {
@@ -430,6 +449,18 @@
       .step-label { font-size: 12px; max-width: 90px; }
       .step-circle { width: 40px; height: 40px; font-size: 16px; }
       .step-connector { margin-top: 18px; }
+      .pain-item { font-size: 16px; gap: 12px; }
+      .pain-item::before { width: 28px; height: 28px; font-size: 13px; }
+      .replaces-list li { font-size: 15px; gap: 12px; }
+      .hero-btn { padding: 16px 32px; font-size: 16px; }
+      .cta a { padding: 18px 36px; font-size: 16px; }
+    }
+
+    /* Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-btn { animation: none; }
+      .reveal { transition: none; opacity: 1; transform: none; }
+      .pain-item { transition: none; opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -490,9 +521,9 @@
     <h2>Схема вашей комнаты с мебелью — за пару минут</h2>
     <div class="slider" id="slider">
       <div class="slides" id="slides">
-        <div class="slide"><img src="для слайдера/2026-05-02 01.52.33.jpg" alt="Шаг 1: размеры комнаты" /></div>
-        <div class="slide"><img src="для слайдера/2026-05-02 01.52.41.jpg" alt="Шаг 2: каталог мебели" /></div>
-        <div class="slide"><img src="для слайдера/2026-05-02 01.52.45.jpg" alt="Шаг 3: расстановка" /></div>
+        <div class="slide"><img src="для слайдера/2026-05-02 01.52.33.jpg" alt="Шаг 1: размеры комнаты" loading="lazy" decoding="async" /></div>
+        <div class="slide"><img src="для слайдера/2026-05-02 01.52.41.jpg" alt="Шаг 2: каталог мебели" loading="lazy" decoding="async" /></div>
+        <div class="slide"><img src="для слайдера/2026-05-02 01.52.45.jpg" alt="Шаг 3: расстановка" loading="lazy" decoding="async" /></div>
       </div>
       <button class="slider-btn prev" id="btn-prev" aria-label="Назад">&#8592;</button>
       <button class="slider-btn next" id="btn-next" aria-label="Вперед">&#8594;</button>
