@@ -15,60 +15,99 @@
 
     :root {
       --blue: #4DABE2;
+      --blue-soft: #E8F4FB;
       --purple: #7965AA;
       --black: #1A1A1A;
       --gray: #F5F5F5;
+      --muted: #6B6B6B;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'ALS Sirius', sans-serif;
       color: var(--black);
       background: #fff;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Reveal-on-scroll ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ── Header ── */
     header {
       padding: 20px 48px;
-      border-bottom: 1px solid #E8E8E8;
+      border-bottom: 1px solid #EFEFEF;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
-    header img { height: 36px; }
+    header img { height: 36px; display: block; }
 
     /* ── Hero ── */
     .hero {
+      position: relative;
       text-align: center;
-      padding: 72px 24px 56px;
-      max-width: 720px;
+      padding: 96px 24px 72px;
+      max-width: 760px;
       margin: 0 auto;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(77,171,226,0.18) 0%, rgba(77,171,226,0) 70%);
+      z-index: -1;
+      pointer-events: none;
     }
     .hero h1 {
-      font-size: clamp(28px, 5vw, 48px);
+      font-size: clamp(30px, 5vw, 52px);
       color: var(--blue);
-      line-height: 1.2;
-      margin-bottom: 20px;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
     }
-    .hero p {
-      font-size: clamp(16px, 2vw, 20px);
+    .hero .lead {
+      font-size: clamp(17px, 2vw, 22px);
       color: var(--black);
+      margin-bottom: 28px;
+    }
+    .hero .bridge {
+      font-size: clamp(15px, 1.6vw, 17px);
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto;
       line-height: 1.6;
     }
+    .hero .bridge b {
+      color: var(--black);
+      font-weight: 500;
+    }
 
-    /* ── Steps ── */
+    /* ── Steps progress ── */
     .steps {
       background: var(--gray);
-      padding: 56px 24px 48px;
+      padding: 64px 24px 56px;
     }
     .steps-inner {
-      max-width: 900px;
+      max-width: 880px;
       margin: 0 auto;
     }
-    .steps h2 {
-      text-align: center;
-      font-size: clamp(20px, 3vw, 30px);
-      color: var(--blue);
-      margin-bottom: 40px;
-    }
-
-    /* Progress track */
     .steps-progress {
       display: flex;
       align-items: flex-start;
@@ -80,25 +119,32 @@
       flex: none;
     }
     .step-circle {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      background: #D0D0D0;
-      color: #fff;
+      background: #fff;
+      color: #C8C8C8;
+      border: 2px solid #DCDCDC;
       font-size: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.4s;
+      transition: background 0.4s, color 0.4s, border-color 0.4s, transform 0.3s;
     }
-    .step-circle.active { background: var(--blue); }
+    .step-circle.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(77,171,226,0.35);
+    }
     .step-label {
-      margin-top: 10px;
-      font-size: 13px;
-      color: #aaa;
+      margin-top: 12px;
+      font-size: 14px;
+      color: #999;
       text-align: center;
-      max-width: 120px;
-      line-height: 1.3;
+      max-width: 140px;
+      line-height: 1.4;
       transition: color 0.4s;
     }
     .step-label.active { color: var(--black); }
@@ -106,8 +152,8 @@
     .step-connector {
       flex: 1;
       height: 4px;
-      background: #D0D0D0;
-      margin: 20px 4px 0;
+      background: #DCDCDC;
+      margin: 22px 6px 0;
       border-radius: 2px;
       overflow: hidden;
     }
@@ -116,28 +162,36 @@
       width: 0%;
       background: var(--blue);
       border-radius: 2px;
-      transition: width 0.4s ease;
+      transition: width 0.5s ease;
     }
 
     /* ── Slider ── */
     .slider-section {
-      padding: 48px 24px 64px;
-      max-width: 960px;
+      padding: 56px 24px 32px;
+      max-width: 980px;
       margin: 0 auto;
+    }
+    .slider-section h2 {
+      text-align: center;
+      font-size: clamp(20px, 2.6vw, 26px);
+      color: var(--blue);
+      margin-bottom: 28px;
+      font-weight: 500;
     }
     .slider {
       position: relative;
       overflow: hidden;
-      border-radius: 20px;
+      border-radius: 24px;
       background: var(--gray);
-      aspect-ratio: 16/9;
+      aspect-ratio: 16/10;
       cursor: grab;
       user-select: none;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
     }
     .slider:active { cursor: grabbing; }
     .slides {
       display: flex;
-      transition: transform 0.4s ease;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
       height: 100%;
     }
     .slides.no-transition { transition: none; }
@@ -149,34 +203,45 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 20px;
       pointer-events: none;
     }
     .slider-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.95);
       border: none;
       border-radius: 50%;
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       font-size: 20px;
+      color: var(--black);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      transition: background 0.2s;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      transition: background 0.2s, transform 0.2s;
     }
-    .slider-btn:hover { background: #fff; }
-    .slider-btn.prev { left: 16px; }
-    .slider-btn.next { right: 16px; }
+    .slider-btn:hover {
+      background: #fff;
+      transform: translateY(-50%) scale(1.08);
+    }
+    .slider-btn.prev { left: 18px; }
+    .slider-btn.next { right: 18px; }
+
+    .swipe-hint {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+    }
 
     /* ── CTA ── */
     .cta {
       text-align: center;
-      padding: 0 24px 80px;
+      padding: 40px 24px 96px;
     }
     .cta a {
       display: inline-block;
@@ -184,20 +249,46 @@
       color: #fff;
       font-family: 'ALS Sirius', sans-serif;
       font-size: 18px;
-      padding: 18px 48px;
+      padding: 20px 56px;
       border-radius: 50px;
       text-decoration: none;
-      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 8px 24px rgba(77,171,226,0.4);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
     }
     .cta a:hover {
       background: var(--purple);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(121,101,170,0.4);
+    }
+    .cta .small {
+      display: block;
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid #EFEFEF;
+      padding: 28px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    footer img {
+      height: 24px;
+      vertical-align: middle;
+      margin-right: 10px;
+      opacity: 0.7;
     }
 
     @media (max-width: 600px) {
       header { padding: 16px 24px; }
+      .hero { padding: 64px 20px 48px; }
       .slider-btn { display: none; }
-      .step-label { font-size: 11px; max-width: 80px; }
+      .step-label { font-size: 12px; max-width: 90px; }
+      .step-circle { width: 40px; height: 40px; font-size: 16px; }
+      .step-connector { margin-top: 18px; }
     }
   </style>
 </head>
@@ -209,15 +300,18 @@
   </header>
 
   <!-- Hero -->
-  <section class="hero">
+  <section class="hero reveal">
     <h1>Проверьте, влезет ли мебель — до покупки</h1>
-    <p>Нарисуем комнату и расставим мебель за вас</p>
+    <p class="lead">Нарисуем комнату и расставим мебель за вас</p>
+    <p class="bridge">
+      Мебель Нонтон подойдёт почти под любую квартиру — <b>главное правильно её расставить.</b>
+      Покажем, как, за три простых шага.
+    </p>
   </section>
 
   <!-- Steps with progress -->
-  <section class="steps">
+  <section class="steps reveal">
     <div class="steps-inner">
-      <h2>Как это работает</h2>
       <div class="steps-progress">
         <div class="step-node">
           <div class="step-circle active" id="circle-0">1</div>
@@ -242,24 +336,33 @@
   </section>
 
   <!-- Slider -->
-  <section class="slider-section">
+  <section class="slider-section reveal">
+    <h2>Так выглядит инструмент</h2>
     <div class="slider" id="slider">
       <div class="slides" id="slides">
-        <div class="slide"><img src="для слайдера/2026-05-02 01.52.33.jpg" alt="Шаг 1" /></div>
-        <div class="slide"><img src="для слайдера/2026-05-02 01.52.41.jpg" alt="Шаг 2" /></div>
-        <div class="slide"><img src="для слайдера/2026-05-02 01.52.45.jpg" alt="Шаг 3" /></div>
+        <div class="slide"><img src="для слайдера/2026-05-02 01.52.33.jpg" alt="Шаг 1: размеры комнаты" /></div>
+        <div class="slide"><img src="для слайдера/2026-05-02 01.52.41.jpg" alt="Шаг 2: каталог мебели" /></div>
+        <div class="slide"><img src="для слайдера/2026-05-02 01.52.45.jpg" alt="Шаг 3: расстановка" /></div>
       </div>
-      <button class="slider-btn prev" id="btn-prev">&#8592;</button>
-      <button class="slider-btn next" id="btn-next">&#8594;</button>
+      <button class="slider-btn prev" id="btn-prev" aria-label="Назад">&#8592;</button>
+      <button class="slider-btn next" id="btn-next" aria-label="Вперёд">&#8594;</button>
     </div>
+    <div class="swipe-hint">← листайте →</div>
   </section>
 
   <!-- CTA -->
-  <section class="cta">
-    <a href="https://makmakarova1995.github.io/nonti-fit-check/" target="_blank">
+  <section class="cta reveal">
+    <a href="https://makmakarova1995.github.io/nonti-fit-check/" target="_blank" rel="noopener">
       Попробовать бесплатно →
     </a>
+    <span class="small">Откроется в новом окне · ничего не нужно устанавливать</span>
   </section>
+
+  <!-- Footer -->
+  <footer>
+    <img src="nonton-logo.png" alt="Nonton" />
+    <span>© 2026 Нонтон</span>
+  </footer>
 
   <script>
     const slidesEl = document.getElementById('slides');
@@ -287,7 +390,7 @@
 
     function resetAuto() {
       clearInterval(autoTimer);
-      autoTimer = setInterval(() => move(1), 4000);
+      autoTimer = setInterval(() => move(1), 4500);
     }
 
     document.getElementById('btn-prev').addEventListener('click', () => { move(-1); resetAuto(); });
@@ -309,7 +412,7 @@
       if (!dragging) return;
       dragging = false;
       slidesEl.classList.remove('no-transition');
-      if (Math.abs(dragX) > sliderEl.offsetWidth * 0.25) move(dragX < 0 ? 1 : -1);
+      if (Math.abs(dragX) > sliderEl.offsetWidth * 0.2) move(dragX < 0 ? 1 : -1);
       else goTo(current);
       resetAuto();
     });
@@ -325,10 +428,21 @@
     }, { passive: true });
     sliderEl.addEventListener('touchend', () => {
       slidesEl.classList.remove('no-transition');
-      if (Math.abs(dragX) > sliderEl.offsetWidth * 0.25) move(dragX < 0 ? 1 : -1);
+      if (Math.abs(dragX) > sliderEl.offsetWidth * 0.2) move(dragX < 0 ? 1 : -1);
       else goTo(current);
       resetAuto();
     });
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
     updateProgress(0);
     resetAuto();
