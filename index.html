@@ -358,6 +358,38 @@
       color: var(--muted);
     }
 
+    /* ── Replaces ── */
+    .replaces {
+      background: var(--gray);
+      padding: 56px 24px;
+    }
+    .replaces-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .replaces-title {
+      font-size: clamp(20px, 3vw, 28px);
+      color: var(--blue);
+      margin-bottom: 32px;
+    }
+    .replaces-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .replaces-list li {
+      font-size: clamp(16px, 2vw, 19px);
+      line-height: 1.5;
+    }
+    .replaces-what {
+      font-weight: 500;
+      color: var(--black);
+    }
+    .replaces-why {
+      color: var(--muted);
+    }
+
     /* ── Footer ── */
     footer {
       border-top: 1px solid #EFEFEF;
@@ -455,6 +487,27 @@
     <a href="https://makmakarova1995.github.io/nonti-fit-check/" target="_blank" rel="noopener">
       Расставить мебель →
     </a>
+  </section>
+
+  <!-- Replaces section -->
+  <section class="replaces reveal">
+    <div class="replaces-inner">
+      <h2 class="replaces-title">Планировщик заменит</h2>
+      <ul class="replaces-list">
+        <li>
+          <span class="replaces-what">Не нужна рулетка</span>
+          <span class="replaces-why">— вводите размеры комнаты, планировщик строит схему сам</span>
+        </li>
+        <li>
+          <span class="replaces-what">Не нужна бумажка</span>
+          <span class="replaces-why">— схема остаётся в браузере, её легко показать близким</span>
+        </li>
+        <li>
+          <span class="replaces-what">Не нужен дизайнер</span>
+          <span class="replaces-why">— расставить мебель и проверить, что всё встанет, займёт 5 минут</span>
+        </li>
+      </ul>
+    </div>
   </section>
 
   <!-- Footer -->
